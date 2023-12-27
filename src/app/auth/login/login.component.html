@@ -1,0 +1,53 @@
+<div class="login">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>Welcome to login</mat-card-title>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              formControlName="email"
+              placeholder="Enter the email"
+            />
+            <!-- <mat-hint *ngIf="loginForm.controls['userName'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)" class="alert alert-danger">
+                  <mat-hint *ngIf="loginForm.controls['username'].errors?.['required']">
+                  UserName is required.
+                </mat-hint>
+              </mat-hint> -->
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              formControlName="password"
+              placeholder="Enter the password"
+            />
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Show error messages</mat-hint> -->
+          </mat-form-field>
+        </p>
+
+        <div class="login-button-row">
+          <button type="button" mat-fab extended color="warn">
+            <!-- <mat-icon>favorite</mat-icon> -->
+            Cancle
+          </button>
+          <button tyee="onSubmit" mat-fab extended color="primary">
+            <!-- <mat-icon>favorite</mat-icon> -->
+            Login
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

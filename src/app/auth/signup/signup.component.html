@@ -1,0 +1,226 @@
+<div class="signupForm">
+  <mat-card class="registeration-card">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>Student Registeration Form</mat-card-title>
+        <!-- <mat-card-subtitle>Medium</mat-card-subtitle>
+        <img
+          mat-card-md-image
+          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Image of a Shiba Inu"
+        /> -->
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      <form
+        [formGroup]="studentRegister"
+        (ngSubmit)="onFormSubmit(studentRegister)"
+      >
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>User Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter your name"
+              formControlName="name"
+              (keypress)="lettersValidate($event)"
+            />
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="Enter your email"
+              formControlName="email"
+            />
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Mobile</mat-label>
+            <input
+              matInput
+              placeholder="Enter mobile number"
+              formControlName="mobile"
+              minlength="10"
+              maxlength="10"
+              (keypress)="validateNumber($event)"
+            />
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              placeholder="Enter the password"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Date of Birth</mat-label>
+            <input
+              matInput
+              [matDatepicker]="datepicker"
+              formControlName="dateOfBirth"
+              [max]="today"
+              [readonly] = "true"
+            />
+            <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="datepicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>
+                  Apply
+                </button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Select Program</mat-label>
+            <mat-select formControlName="programCategory">
+              <mat-option
+                *ngFor="let data of CourseCategory"
+                [value]="data._id"
+                >{{ data.course_name }}</mat-option
+              >
+            </mat-select>
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input
+              matInput
+              placeholder="Enter the city"
+              formControlName="city"
+              (keypress)="lettersValidate($event)"
+            />
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </div>
+
+        <div class="register-button-row">
+          <button type="onSubmit" mat-fab extended color="primary">
+            <!-- <mat-icon>favorite</mat-icon> -->
+            Login
+          </button>
+
+          <button
+            type="button"
+            mat-fab
+            extended
+            color="warn"
+            (click)="resetForm()"
+          >
+            <!-- <mat-icon>favorite</mat-icon> -->
+            Cancle
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- <h3>Reactive Form</h3>
+<p *ngIf="isValidFormSubmitted && studentForm.pristine" [ngClass] = "'success'">
+    Form submitted successfully.
+</p>
+<form [formGroup]="studentForm" (ngSubmit)="onFormSubmit()">
+ <table>
+  <tr> 
+	<td>User Name: </td>
+	<td> 
+		<input formControlName="username">
+		<div *ngIf="username.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+			<div *ngIf="username.errors?.['required']">
+				User name required.
+			</div>  
+			<div *ngIf="username.errors?.['pattern']">
+				User name not valid.
+			</div> 
+		</div>
+	</td>
+  </tr> 
+  <tr> 
+	<td>Password: </td>
+	<td> 
+		<input type="password" formControlName="password">
+		<div *ngIf="password.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+			<div *ngIf="password.errors?.['required']">
+				Password required.
+			</div>  
+			<div *ngIf="password.errors?.['pattern']">
+				Password not valid.
+			</div> 
+		</div>		   
+	</td>
+  </tr> 	 
+  <tr>
+	<td>Mobile Number: </td>
+	<td> 
+		<input formControlName="mobileNumber">
+		<div *ngIf="mobileNumber.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+			<div *ngIf="mobileNumber.errors?.['pattern']">
+				Mobile number not valid.
+			</div> 
+		</div>		   
+	</td>
+  </tr> 	 	 
+  <tr>
+	<td>Email: </td>
+	<td> 
+		<input formControlName="email">
+		<div *ngIf="email.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+			<div *ngIf="email.errors?.['pattern']">
+				Email not valid.
+			</div> 
+		</div>		   
+	</td>
+  </tr>
+  <tr> 	  
+	<td colspan="2">
+		<button>Submit</button>
+	</td>
+  </tr>	   
+ </table>  
+</form>  -->
