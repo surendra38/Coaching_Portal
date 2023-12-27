@@ -1,0 +1,21 @@
+.signupForm {
+    height: 100%;
+    // width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .register-button-row button,
+  .register-button-row a {
+    margin-right: 8px;
+    float: right;
+  }
+  
+  .mat-mdc-card {
+      width: 50%;
+  }
+  .mat-mdc-form-field{
+      width: 100%;
+  }
+  

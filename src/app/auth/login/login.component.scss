@@ -1,0 +1,23 @@
+.login {
+    height: 100vh;
+    // width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  
+  .login-button-row button,
+  .login-button-row a {
+    margin-right: 8px;
+    float: right;
+  }
+  
+  .mat-mdc-card {
+      width: 50%;
+  }
+  .mat-mdc-form-field{
+      width: 100%;
+  }
+  
