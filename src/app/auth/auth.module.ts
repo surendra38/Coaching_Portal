@@ -25,7 +25,8 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    
   ]
 })
 export class AuthModule { }

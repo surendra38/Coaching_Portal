@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/service/api.service';
 import { StudentDataValidaion } from './studentDataValidation';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,11 @@ export class SignupComponent implements OnInit {
   CourseCategory: any;
   today = new Date();
 
-  constructor(private _api: ApiService, private router: Router) {}
+  constructor(
+    private _api: ApiService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.formInIt();
@@ -43,6 +48,7 @@ export class SignupComponent implements OnInit {
 
   onFormSubmit(studentRegister: any) {
     if (studentRegister.invalid) {
+      this.toastr.error('Please enter correct details');
       return;
     } else {
       studentRegister.value['dateOfBirth'] = moment(
@@ -51,6 +57,7 @@ export class SignupComponent implements OnInit {
       let student: Partial<StudentDataValidaion> = studentRegister.value;
       this._api.postData('registerStudent', student).subscribe((res: any) => {
         if (res) {
+          this.toastr.error('Login successfully');
           localStorage.setItem('auth', res.auth);
           this.studentRegister.reset();
           this.router.navigate(['/login']);
